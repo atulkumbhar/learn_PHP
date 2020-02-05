@@ -1,0 +1,127 @@
+<!--
+Initially files are uploaded into a temporary directory and 
+then relocated to a target destination by a PHP script.
+
+Information in the phpinfo.php page describes the temporary 
+directory that is used for file uploads as upload_tmp_dir and 
+the maximum permitted size of files that can be uploaded is
+stated as upload_max_filesize. These parameters are set into 
+PHP configuration file php.ini
+
+The process of uploading a file follows these steps −
+
+1. The user opens the page containing a HTML form featuring a text files,
+ a browse button and a submit button.
+
+2. The user clicks the browse button and selects a file to upload from the local PC.
+
+3. The full path to the selected file appears in the text filed then the 
+user clicks the submit button.
+
+4. The selected file is sent to the temporary directory on the server.
+
+5. The PHP script that was specified as the form handler in the form's 
+action attribute checks that the file has arrived and then copies the 
+file into an intended directory.
+
+6. The PHP script confirms the success to the user.
+
+As usual when writing files it is necessary for both temporary and 
+final locations to have permissions set that enable file writing. 
+If either is set to be read-only then process will fail.
+
+An uploaded file could be a text file or image file or any document.
+-->
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="upload.php" method="post" enctype="multipart/form-data">
+	<!-- 
+	1. method="post"
+	2. attribute: enctype="multipart/form-data". It specifies which
+	content-type to use when submitting the form
+	-->
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+	<!-- 
+	The type="file" attribute of the <input> tag shows the input 
+	field as a file-select control, with a "Browse" button next to the input control
+	-->
+	 
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+
+</body>
+</html>
+
+<!--
+When submitting a form, you tell your browser to send, via the HTTP protocol,
+ a message on the network, properly enveloped in a TCP/IP protocol message structure.
+ An HTML page has a way to send data to the server: by using <form>s.
+
+When a form is submitted, an HTTP Request if created and sent to the server, 
+the message will contain the field names in the form and the values filled 
+in by the user. This transmission can happen with POST or GET HTTP methods.
+
+POST tells your browser to build an HTTP message and put all content in the 
+body of the message (a very useful way of doing things, more safe and also flexible).
+GET will submit the form data in the querystring. It has some constraints
+ about data representation and length.
+ 
+Stating how to send your form to the server:
+Attribute enctype has sense only when using POST method. When specified,
+ it instructs the browser to send the form by encoding its content in a
+ specific way. From MDN - Form enctype:
+
+When the value of the method attribute is post, enctype is the MIME 
+type of content that is used to submit the form to the server.
+
+application/x-www-form-urlencoded: This is the default. When the form is sent, 
+all names and values are collected and URL Encoding is performed on the final string.
+
+multipart/form-data: Characters are NOT encoded. This is important when the 
+form has a file upload control. You want to send the file binary and this 
+ensures that bitstream is not altered.
+
+text/plain: Spaces get converted, but no more encoding is performed.
+
+-->
+
+<!--  Home work/ Assignment 
+
+ https://errorsea.com/what-is-the-php-_files-and-how-to-use-_files/ 
+What Is the PHP $_FILES, and How to Use $_FILES
+
+
+Sometimes we want to upload a file in our HTML form. 
+PHP provides the feature for handling a file at server
+ side with $_FILES array. We can also check different 
+ properties of an files like file-name, file-type, file-size,
+ and some other attributes.
+
+ 
+	
+ 
+What is $_FILES?
+PHP provides one global variable called $_FILES.
+ It is a two-dimensional associative array that keeps 
+ information related to uploaded files via the HTTP POST method.
+
+It holds attribute as follows:
+
+Attribute	Description
+[name]	    Name of the file being uploaded
+[size]	    Size of the file
+[type]     	Type of file
+[tmp_name]	Temporary address where the file is located before processing the upload request
+[error]	    Error code associated with the file
+Above attributes syntax with $_FILES.
+
+$_FILES[file][name]
+$_FILES[file][tmp_name]
+$_FILES[file][type]
+$_FILES[file][size]
+$_FILES[file][error]
+-->
