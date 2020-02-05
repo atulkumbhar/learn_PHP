@@ -76,6 +76,19 @@
       <h2>Absolute classes registration</h2>
       
       <p><span class = "error">* required field.</span></p>
+	  <!--
+	  In a form on a PHP page, you can use:
+
+		<form action="< ?php echo $_SERVER['PHP_SELF']; ?>" ...>
+		or
+
+		<form action="#" ...>
+		or
+
+		<form action="" ...>
+		in the action attribute of the form. 
+		Since echo $_SERVER['PHP_SELF'] does not pass variables for using GET 
+	  -->
       
       <form method = "POST" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
          <table>
@@ -160,3 +173,26 @@
       
    </body>
 </html>
+
+<!--
+	  Using PHP_SELF in the action field of a form
+		In this article shows the usage of PHP_SELF variable and how to avoid PHP_SELF exploits.
+
+	What is PHP_SELF variable?
+	PHP_SELF is a variable that returns the current script being executed. This variable returns the name and path of the current file (from the root folder). You can use this variable in the action field of the FORM. There are also certain exploits that you need to be aware of. We shall discuss all these points in this article. We will now see some examples. echo $_SERVER['PHP_SELF'];
+
+		a) Suppose your php file is located at the address: http://www.yourserver.com/form-action.php
+
+		In this case, PHP_SELF will contain: "/form-action.php"
+
+b) Suppose your php file is located at the address: http://www.yourserver.com/dir1/form-action.php
+
+For this URL, PHP_SELF will be : "/dir1/form-action.php"
+
+Using the PHP_SELF variable in the action field of the form
+A common use of PHP_SELF variable is in the action field of the <form> tag. The action field of the FORM instructs where to submit the form data when the user presses the "submit" button. It is common to have the same PHP page as the handler for the form as well.
+
+However, if you provide the name of the file in the action field, in case you happened to rename the file, you need to update the action field as well; or your forms will stop working.
+
+Using PHP_SELF variable you can write more generic code which can be used on any page and you do not need to edit the action field.
+	  -->
